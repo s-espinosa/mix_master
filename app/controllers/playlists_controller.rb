@@ -12,7 +12,11 @@ class PlaylistsController < ApplicationController
 
   def create
     @playlist = Playlist.create(playlist_params)
-    redirect_to playlist_path(@playlist.id)
+    if @playlist.save
+      redirect_to playlist_path(@playlist.id)
+    else
+      render :new
+    end
   end
 
   def show
